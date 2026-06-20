@@ -1,15 +1,15 @@
-const mongoose = require("mongoose");
-const express = require("express");
-const config = require("./utils/config");
+import express from "express";
+
+import {PORT} from "./config/env.js";
 
 const app = express();
 
-mongoose
-  .connect(config.MONGODB_URL, { family: 4 })
-  .then(() => console.log("Connected to MongoDB"))
-  .catch((e) => console.log("Error connection to MongoDB", e.message));
+app.get("/", (req, res) => {
+    res.send("Hello World!");
+})
 
-// app.use(express.static());
-app.use(express.json());
+app.listen(PORT, () => {
+    console.log(`Server started on port http://localhost:${PORT}`);
+});
 
-module.exports = app;
+export default app;
